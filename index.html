@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>doxbin darknet</title>
+  <link rel="shortcut icon" type="x-icon" href="https://files.catbox.moe/3pi8q7.png"
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --fg: #e7e7e7;
+      --muted: #9aa3ab;
+      --accent: #ff2d55;
+      --mono: 'VT323', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+
+    body {
+      font-family: var(--sans);
+      color: var(--fg);
+      position: relative;
+      overflow-x: hidden;
+      background: #000;
+    }
+
+    #bgVideo, #bgImage, #bgBlack {
+      position: fixed;
+      top:0;left:0;right:0;bottom:0;
+      width:100%;
+      height:100%;
+      z-index:-2;
+      display:none;
+    }
+
+    #bgVideo { 
+      object-fit:cover;
+      filter:brightness(.75) saturate(.100);
+    }
+    #bgImage {
+      background:url("https://files.catbox.moe/z37ghe.png") center center no-repeat;
+      background-size:cover;
+    }
+    #bgBlack {background:#000;}
+
+    .wrap {
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:4rem 1rem 2rem;
+      z-index:1;
+      position:relative;
+    }
+
+    .container{
+      width: min(1100px,100%);
+      text-align:center;
+    }
+
+    .title {
+      font-family:var(--mono);
+      font-size: clamp(2.2rem,6vw,4rem);
+      letter-spacing:.03em;
+      margin-bottom:2.5rem;
+    }
+
+    .profiles {
+      display:flex;
+      justify-content:center;
+      gap:2rem;
+      flex-wrap:wrap;
+      margin-top:2rem;
+    }
+    .profile{text-align:center;}
+    .avatar {
+      width:150px; height:150px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid rgba(255,255,255,.2);
+      box-shadow:0 0 0 3px rgba(0,0,0,.35),0 10px 18px rgba(0,0,0,.4);
+      margin-bottom:.75rem;
+    }
+    .name {
+      font-weight:700;
+      font-size:1.15rem;
+      letter-spacing:.02em;
+    }
+    .dot {
+      display:inline-block;
+      width:8px;height:8px;
+      border-radius:50%;
+      background:var(--accent);
+      margin-right:.5rem;
+      box-shadow:0 0 12px var(--accent);
+    }
+    .role {
+      font-size:.95rem;
+      color:var(--muted);
+      margin-top:.25rem;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:200px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .music-controls,
+    .background-controls{
+      margin-top:3rem;
+      font-family:var(--mono);
+      font-size:1rem;
+    }
+
+    select {
+      background:rgba(0,0,0,0.5);
+      color:var(--fg);
+      border:none;
+      border-radius:4px;
+      padding:.4rem;
+      font-family:var(--mono);
+    }
+
+    .socials{margin-top:3rem;}
+    .socials-title {
+      font-family:var(--mono);
+      margin-bottom:.5rem;
+      font-size:1.1rem;
+      letter-spacing:.03em;
+    }
+    .social-icons {
+      display:flex;
+      justify-content:center;
+      gap:1.5rem;
+    }
+    .social-icons img {
+      width:32px;height:32px;
+      filter:invert(1);
+      opacity:.85;
+      transition:.2s;
+    }
+    .social-icons img:hover{
+      transform:scale(1.15);
+      opacity:1;
+    }
+
+    .footer {
+      margin-top:2.5rem;
+      padding-top:1rem;
+      border-top:1px solid rgba(255,255,255,0.15);
+      font-family:var(--mono);
+      font-size:1rem;
+      color:var(--muted);
+    }
+    .footer a {
+      text-decoration:none;
+      color:var(--fg);
+    }
+    .footer a:hover{color:var(--accent);}
+
+    audio{display:none;}
+  </style>
+</head>
+<body>
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="https://files.catbox.moe/izawsr.mp4" type="Video/mp4">
+  </video>
+  <div id="bgImage"></div>
+  <div id="bgBlack"></div>
+
+  <main class="wrap">
+    <div class="container">
+      <h1 class="title">- doxbin darknet x worry.sh -</h1>
+
+      <div class="profiles">
+        <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/2498rb.png" alt="GF avatar">
+          <div class="name"><span class="dot"></span>GF</div>
+          <div class="role">Owner @ doxbin /kayte</div>
+        </div>
+        <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/etpu83.png" alt="Second avatar">
+          <div class="name"><span class="dot"></span>exploit</div>
+          <div class="role">admin @ doxbin</div>
+        </div>
+         <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/3rklpb.png" alt="Second avatar">
+          <div class="name"><span class="dot"></span>Tail</div>
+          <div class="role">manager @ doxbin</div>
+        </div>
+         <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/9neavs.jpg" alt="Second avatar">
+          <div class="name"><span class="dot"></span>Null</div>
+          <div class="role">moderator @ doxbin</div>
+        </div>
+         <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/mf67md.png" alt="Second avatar">
+          <div class="name"><span class="dot"></span>geld</div>
+          <div class="role">admin @ doxbin</div>
+        </div>
+         <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/149mb9.png" alt="Second avatar">
+          <div class="name"><span class="dot"></span>lace</div>
+          <div class="role">moderator @ doxbin</div>
+        </div>
+          <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/z4e4r4.jpg" alt="Second avatar">
+          <div class="name"><span class="dot"></span>OpSex</div>
+          <div class="role">moderator @ doxbin</div>
+        </div>
+          <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/z4dicc.webp" alt="Second avatar">
+          <div class="name"><span class="dot"></span>4zurf</div>
+          <div class="role">clique @ doxbin</div>
+        </div>
+         <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/3kmc4b.png" alt="Second avatar">
+          <div class="name"><span class="dot"></span>rize</div>
+          <div class="role">helper @ doxbin</div>
+        </div>
+          <div class="profile">
+          <img class="avatar" src="https://files.catbox.moe/1iehnz.webp" alt="Second avatar">
+          <div class="name"><span class="dot"></span>Cael</div>
+          <div class="role">moderator @ doxbin</div>
+        </div>
+
+        </div>
+
+      <div class="music-controls">
+        <label for="songSelect">Choose a song: </label>
+        <select id="songSelect" onchange="changeSong()">
+          <option value="https://files.catbox.moe/50ekpt.mp3">Song 1</option>
+          <option value="">Song 2 (tbd)</option>
+        </select>
+        <audio id="audioPlayer" autoplay loop>
+          <source src="https://files.catbox.moe/l92lp3.m4a" type="audio/mp4">
+        </audio>
+      </div>
+
+      <div class="background-controls">
+        <label for="bgSelect">Background: </label>
+        <select id="bgSelect" onchange="changeBackground()">
+          <option value="Video">Video</option>
+          <option value="image">Image</option>
+          <option value="black">Black</option>
+        </select>
+      </div>
+
+      <div class="socials">
+        <div class="socials-title">-- Socials --</div>
+        <div class="social-icons">
+          <a href="https://t.me/doxbintrials" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+           </a>
+          <a href="https://t.me/worrydotsh" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>These are our only socials. Beware of impersonators.</p>
+        <p>Active domains:
+          <a href="https://doxbin.live">doxbindarknet</a> | 
+          <a href="#">backup domain coming soon..</a>
+        </p>
+        <p>PGP:593A F9EF C872 4F50</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const player = document.getElementById('audioPlayer');
+    const bgVideo = document.getElementById('bgVideo');
+    const bgImage = document.getElementById('bgImage');
+    const bgBlack = document.getElementById('bgBlack');
+
+    bgVideo.style.display = 'block';
+
+    window.addEventListener('load', ()=>{
+      player.play().catch(()=>{
+        console.log('Autoplay blocked');
+      });
+    });
+
+    function changeSong(){
+      const sel = document.getElementById('songSelect');
+      player.src = sel.value;
+      player.play();
+    }
+
+    function changeBackground(){
+      const sel = document.getElementById('bgSelect');
+      bgVideo.style.display = 'none';
+      bgImage.style.display = 'none';
+      bgBlack.style.display = 'none';
+      if(sel.value==='video') bgVideo.style.display = 'block';
+      else if(sel.value==='image') bgImage.style.display = 'block';
+      else bgBlack.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
